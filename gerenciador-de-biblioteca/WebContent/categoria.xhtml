@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+<ui:composition template="/WEB-INF/_template.xhtml">
+
+	<ui:define name="corpo">
+
+		<h:form>
+			<h2>
+				<h:outputText value="Nova Categoria" rendered="#{empty categoriaBean.categoria.id}" />
+				<h:outputText value="Editar Categoria" rendered="#{not empty categoriaBean.categoria.id}" />
+			</h2>
+		
+			<fieldset>
+				<legend>Dados da Categoria</legend>
+			
+				<h:inputHidden value="#{categoriaBean.categoria.id}" />
+			
+				<h:outputLabel value="Nome da categoria:" for="nome" />
+				<h:inputText id="nome" value="#{categoriaBean.categoria.nome}" />
+				
+				<h:commandButton value="Salvar" action="#{categoriaBean.salvar}" />
+			</fieldset>
+		</h:form>
+		
+		<h:form>
+			<h2>Listagem de Categorias</h2>
+			
+			<h:dataTable value="#{categoriaBean.categorias}" var="categoria" styleClass="dados" rowClasses="impar, par">
+				<h:column>
+					<f:facet name="header">Nome da categoria</f:facet>
+					#{categoria.nome}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Ações</f:facet>
+					<h:commandLink action="#{categoriaBean.remover(categoria)}" value="Remover" />
+						
+					&nbsp;
+					
+					<h:commandLink value="Alterar">
+						<f:setPropertyActionListener target="#{categoriaBean.categoria}" value="#{categoria}" />
+					</h:commandLink>
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	
+	</ui:define>
+	
+</ui:composition>
+
+</html>

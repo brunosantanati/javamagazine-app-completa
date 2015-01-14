@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+<ui:composition template="/WEB-INF/_template.xhtml">
+
+	<ui:define name="corpo">
+
+		<h:form id="formDevolucao">
+			<h2>
+				<h:outputText value="Devolução" />
+			</h2>
+		
+			<fieldset>
+				<legend>Dados da Devolução</legend>
+				
+				<h:outputLabel value="Escolher livro a devolver:" for="livro" />
+				<h:selectOneMenu id="livro" value="#{devolucaoBean.idLivro}">
+					<f:selectItem itemLabel="" itemValue="#{null}" />
+					<f:selectItems value="#{devolucaoBean.livrosEmprestados}" var="livro" itemValue="#{livro.id}" itemLabel="#{livro.nome}" />
+					<f:ajax listener="#{devolucaoBean.alteradoLivroSelecionado}" render="formDevolucao" />
+				</h:selectOneMenu>
+				
+				<h:outputLabel value="Emprestado para:" for="emprestadoPara" />
+				<h:inputText id="emprestadoPara" value="#{devolucaoBean.emprestimo.leitor.nome}"  disabled="true" />
+				
+				<h:outputLabel value="Emprestado por:" for="emprestadoPor" />
+				<h:inputText id="emprestadoPor" value="#{devolucaoBean.emprestimo.funcionarioBiblioteca.nome}"  disabled="true" />
+				
+				<h:outputLabel value="Data do empréstimo:" for="dataEmprestimo" />
+				<h:inputText id="dataEmprestimo" value="#{devolucaoBean.dataEmprestimoFormatada}"  disabled="true" />
+				
+				<h:outputLabel value="Data prevista para devolução:" for="dataPrevista" />
+				<h:inputText id="dataPrevista" value="#{devolucaoBean.dataPrevistaFormatada}"  disabled="true" />
+				
+				<h:outputLabel value="Multa por atraso:" for="multa" />
+				<h:inputText id="multa" value="#{devolucaoBean.multa}"  disabled="true" />
+				
+				<h:commandButton value="Realizar Devolução" action="#{devolucaoBean.realizarDevolucao}" />
+			</fieldset>
+		</h:form>
+
+	</ui:define>
+	
+</ui:composition>
+
+</html>

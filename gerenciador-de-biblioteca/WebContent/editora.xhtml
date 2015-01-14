@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+<ui:composition template="/WEB-INF/_template.xhtml">
+
+	<ui:define name="corpo">
+	
+		<h:form>
+			<h2>
+				<h:outputText value="Nova Editora" rendered="#{empty editoraBean.editora.id}" />
+				<h:outputText value="Editar Editora" rendered="#{not empty editoraBean.editora.id}" />
+			</h2>
+		
+			<fieldset>
+				<legend>Dados da Editora</legend>
+				
+				<h:inputHidden value="#{editoraBean.editora.id}" />				
+				<h:inputHidden value="#{editoraBean.telefoneFixo.id}" />				
+				<h:inputHidden value="#{editoraBean.telefoneCelular.id}" />				
+				<h:inputHidden value="#{editoraBean.editora.endereco.id}" />
+			
+				<h:outputLabel value="Nome da editora:" for="nome" />
+				<h:inputText id="nome" value="#{editoraBean.editora.nome}" />
+				
+				<h:outputLabel value="Site:" for="site" />
+				<h:inputText id="site" value="#{editoraBean.editora.site}" />
+				
+				<h:outputLabel value="E-mail:" for="email" />
+				<h:inputText id="email" value="#{editoraBean.editora.email}" />
+				
+				<h:outputLabel value="Telefone Fixo:" for="telefoneFixo" />
+				<h:inputText id="telefoneFixo" value="#{editoraBean.telefoneFixo.numero}" />
+				
+				<h:outputLabel value="Telefone Celular:" for="telefoneCelular" />
+				<h:inputText id="telefoneCelular" value="#{editoraBean.telefoneCelular.numero}" />
+				
+				<h:outputLabel value="Endereço:" for="endereco" />
+				<h:inputText id="endereco" value="#{editoraBean.editora.endereco.endereco}" />
+				
+				<h:outputLabel value="Complemento:" for="complemento" />
+				<h:inputText id="complemento" value="#{editoraBean.editora.endereco.complemento}" />
+				
+				<h:outputLabel value="Cep:" for="cep" />
+				<h:inputText id="cep" value="#{editoraBean.editora.endereco.cep}" />
+				
+				<h:outputLabel value="Bairro:" for="bairro" />
+				<h:inputText id="bairro" value="#{editoraBean.editora.endereco.bairro}" />
+				
+				<h:outputLabel value="Cidade:" for="cidade" />
+				<h:inputText id="cidade" value="#{editoraBean.editora.endereco.cidade}" />
+				
+				<h:outputLabel value="Estado:" for="estado" />
+				<h:inputText id="estado" value="#{editoraBean.editora.endereco.estado}" />
+				
+				<h:commandButton value="Salvar" action="#{editoraBean.salvar}" />
+			</fieldset>
+		</h:form>
+
+		<h:form>
+			<h2>Listagem de Editoras</h2>
+			
+			<h:dataTable value="#{editoraBean.editoras}" var="editora" styleClass="dados" rowClasses="impar, par">
+				<h:column>
+					<f:facet name="header">Nome da editora</f:facet>
+					#{editora.nome}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Site</f:facet>
+					#{editora.site}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">E-mail</f:facet>
+					#{editora.email}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Telefones</f:facet>
+					#{editora.telefones[0].numero}, #{editora.telefones[1].numero}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Endereço</f:facet>
+					#{editora.endereco.endereco}, #{editora.endereco.complemento}, CEP: #{editora.endereco.cep} 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Bairro</f:facet>
+					#{editora.endereco.bairro}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Cidade</f:facet>
+					#{editora.endereco.cidade}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Estado</f:facet>
+					#{editora.endereco.estado}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Ações</f:facet>
+					<h:commandLink action="#{editoraBean.remover(editora)}" value="Remover" />
+						
+					&nbsp;
+					
+					<h:commandLink action="#{editoraBean.alterar(editora)}" value="Alterar" />						
+				</h:column>
+			</h:dataTable>
+		</h:form>
+
+	</ui:define>
+	
+</ui:composition>
+</html>

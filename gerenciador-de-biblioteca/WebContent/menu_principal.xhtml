@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+<ui:composition template="/WEB-INF/_template_simples.xhtml">
+
+	<ui:define name="corpo">
+
+		<h:form>
+		
+			<h:commandLink value="Realizar Empréstimo de Livro" action="emprestimo?faces-redirect=true" />
+			
+			<br/>
+			
+			<h:commandLink value="Realizar Devolução de Livro" action="devolucao?faces-redirect=true" />
+			
+			<br/>
+			
+			<h:commandLink value="Realizar Renovação de Livro" action="renovacao?faces-redirect=true" />
+			
+			<br/>
+		
+			<h:commandLink value="Cadastro de Categoria" action="categoria?faces-redirect=true" />
+
+			<br/>
+			
+			<h:commandLink value="Cadastro de Autor" action="autor?faces-redirect=true" />
+
+			<br/>
+						
+			<h:commandLink value="Cadastro de Editora" action="editora?faces-redirect=true" />
+			
+			<br/>
+			
+			<h:commandLink value="Cadastro de Livro" action="livro?faces-redirect=true" />
+			
+			<br/>
+			
+			<h:commandLink value="Cadastro de Leitor" action="leitor?faces-redirect=true" />
+			
+			<br/>
+					
+			<h:commandLink value="Cadastro de Funcionário e Usuário" action="funcionario_biblioteca?faces-redirect=true" 
+								   rendered="#{usuarioLogadoBean.usuario.admin}" />
+		</h:form>
+
+	</ui:define>
+	
+</ui:composition>
+
+</html>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+<ui:composition template="/WEB-INF/_template.xhtml">
+
+	<ui:define name="corpo">
+
+		<h:form>
+			<h2>
+				<h:outputText value="Novo Livro" rendered="#{empty livroBean.livro.id}" />
+				<h:outputText value="Editar Livro" rendered="#{not empty livroBean.livro.id}" />
+			</h2>
+		
+			<fieldset>
+				<legend>Dados do Livro</legend>
+				
+				<h:inputHidden value="#{livroBean.livro.id}" />
+				
+				<h:outputLabel value="Nome do livro:" for="nome" />
+				<h:inputText id="nome" value="#{livroBean.livro.nome}" />
+				
+				<h:outputLabel value="ISBN:" for="isbn" />
+				<h:inputText id="isbn" value="#{livroBean.livro.isbn}" />
+				
+				<h:outputLabel value="Categoria:" for="categoria" />
+				<h:selectOneMenu id="categoria" value="#{livroBean.idCategoria}">
+					<f:selectItems value="#{categoriaBean.categorias}" var="categoria" itemValue="#{categoria.id}" itemLabel="#{categoria.nome}" />
+				</h:selectOneMenu>
+				
+				<h:outputLabel value="Editora:" for="editora" />
+				<h:selectOneMenu id="editora" value="#{livroBean.idEditora}">
+					<f:selectItems value="#{editoraBean.editoras}" var="editora" itemValue="#{editora.id}" itemLabel="#{editora.nome}" />
+				</h:selectOneMenu>
+				
+				<h:outputLabel value="Autor:" for="autor" />
+				<h:selectOneMenu id="autor" value="#{livroBean.idAutor}">
+					<f:selectItems value="#{autorBean.autores}" var="autor" itemValue="#{autor.id}" itemLabel="#{autor.nome}" />
+				</h:selectOneMenu>
+				
+				<h:commandButton value="Adicionar Autor" action="#{livroBean.adicionarAutor}" />
+				
+				<h:dataTable value="#{livroBean.autores}" var="autor">
+					<h:column>
+						#{autor.nome}
+					</h:column>
+					
+					<h:column>
+						<h:commandLink action="#{livroBean.removerAutor(autor)}" value="Remover" />
+					</h:column>
+				</h:dataTable>
+				
+				<h:commandButton value="Salvar" action="#{livroBean.salvar}" />
+			</fieldset>
+		</h:form>
+		
+		<h:form>
+			<h2>Listagem de Livros</h2>
+			
+			<h:dataTable value="#{livroBean.livros}" var="livro" styleClass="dados" rowClasses="impar, par">
+				<h:column>
+					<f:facet name="header">Nome do livro</f:facet>
+					#{livro.nome}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">ISBN</f:facet>
+					#{livro.isbn}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Categoria</f:facet>
+					#{livro.categoria.nome}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Editora</f:facet>
+					#{livro.editora.nome}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Autores</f:facet>
+					<h:dataTable value="#{livro.autores}" var="autor">
+						<h:column>
+							#{autor.nome}
+						</h:column>
+					</h:dataTable>
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Ações</f:facet>
+					<h:commandLink action="#{livroBean.remover(livro)}" value="Remover" />
+						
+					&nbsp;
+							
+					<h:commandLink action="#{livroBean.alterar(livro)}" value="Alterar" />
+				</h:column>
+			</h:dataTable>
+		</h:form>
+
+	</ui:define>
+	
+</ui:composition>
+
+</html>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+<ui:composition template="/WEB-INF/_template.xhtml">
+
+	<ui:define name="corpo">
+
+		<h:form>
+			<h2>
+				<h:outputText value="Novo Autor" rendered="#{empty autorBean.autor.id}" />
+				<h:outputText value="Editar Autor" rendered="#{not empty autorBean.autor.id}" />
+			</h2>
+		
+			<fieldset>
+				<legend>Dados do Autor</legend>
+				
+				<h:inputHidden value="#{autorBean.autor.id}" />
+				
+				<h:outputLabel value="Nome do autor:" for="nome" />
+				<h:inputText id="nome" value="#{autorBean.autor.nome}" />
+				
+				<h:commandButton value="Salvar" action="#{autorBean.salvar}" />
+			</fieldset>
+		</h:form>
+		
+		<h:form>
+			<h2>Listagem de Autores</h2>
+			
+			<h:dataTable value="#{autorBean.autores}" var="autor" styleClass="dados" rowClasses="impar, par">
+				<h:column>
+					<f:facet name="header">Nome do autor</f:facet>
+					#{autor.nome}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Ações</f:facet>
+					<h:commandLink action="#{autorBean.remover(autor)}" value="Remover" />
+						
+					&nbsp;
+					
+					<h:commandLink value="Alterar">
+						<f:setPropertyActionListener target="#{autorBean.autor}" value="#{autor}" />
+					</h:commandLink>
+				</h:column>
+			</h:dataTable>
+		</h:form>
+
+	</ui:define>
+	
+</ui:composition>
+
+</html>

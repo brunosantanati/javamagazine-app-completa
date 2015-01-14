@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+<ui:composition template="/WEB-INF/_template.xhtml">
+
+	<ui:define name="corpo">
+	
+		<h:form>
+			<h2>
+				<h:outputText value="Novo Leitor" rendered="#{empty leitorBean.leitor.id}" />
+				<h:outputText value="Editar Leitor" rendered="#{not empty leitorBean.leitor.id}" />
+			</h2>
+		
+			<fieldset>
+				<legend>Dados do Leitor</legend>
+				
+				<h:inputHidden value="#{leitorBean.leitor.id}" />				
+				<h:inputHidden value="#{leitorBean.telefoneFixo.id}" />				
+				<h:inputHidden value="#{leitorBean.telefoneCelular.id}" />				
+				<h:inputHidden value="#{leitorBean.leitor.endereco.id}" />
+			
+				<h:outputLabel value="Nome do leitor:" for="nome" />
+				<h:inputText id="nome" value="#{leitorBean.leitor.nome}" />
+				
+				<h:outputLabel value="E-mail:" for="email" />
+				<h:inputText id="email" value="#{leitorBean.leitor.email}" />
+				
+				<h:outputLabel value="CPF:" for="cpf" />
+				<h:inputText id="cpf" value="#{leitorBean.leitor.cpf}" />
+
+				<h:outputLabel value="Sexo:" for="sexo" />
+				<h:selectOneRadio id="sexo" value="#{leitorBean.leitor.sexo}">
+					<f:selectItem itemValue="M" itemLabel="Masculino" />
+					<f:selectItem itemValue="F" itemLabel="Feminino" />
+				</h:selectOneRadio>
+				
+				<h:outputLabel value="Turma:" for="turma" />
+				<h:inputText id="turma" value="#{leitorBean.leitor.turma}" />
+				
+				<h:outputLabel value="Matricula:" for="matricula" />
+				<h:inputText id="matricula" value="#{leitorBean.leitor.matricula}" />
+
+				<h:outputLabel value="Telefone Fixo:" for="telefoneFixo" />
+				<h:inputText id="telefoneFixo" value="#{leitorBean.telefoneFixo.numero}" />
+				
+				<h:outputLabel value="Telefone Celular:" for="telefoneCelular" />
+				<h:inputText id="telefoneCelular" value="#{leitorBean.telefoneCelular.numero}" />
+				
+				<h:outputLabel value="Endereço:" for="endereco" />
+				<h:inputText id="endereco" value="#{leitorBean.leitor.endereco.endereco}" />
+				
+				<h:outputLabel value="Complemento:" for="complemento" />
+				<h:inputText id="complemento" value="#{leitorBean.leitor.endereco.complemento}" />
+				
+				<h:outputLabel value="Cep:" for="cep" />
+				<h:inputText id="cep" value="#{leitorBean.leitor.endereco.cep}" />
+				
+				<h:outputLabel value="Bairro:" for="bairro" />
+				<h:inputText id="bairro" value="#{leitorBean.leitor.endereco.bairro}" />
+				
+				<h:outputLabel value="Cidade:" for="cidade" />
+				<h:inputText id="cidade" value="#{leitorBean.leitor.endereco.cidade}" />
+				
+				<h:outputLabel value="Estado:" for="estado" />
+				<h:inputText id="estado" value="#{leitorBean.leitor.endereco.estado}" />
+				
+				<h:commandButton value="Salvar" action="#{leitorBean.salvar}" />
+			</fieldset>
+		</h:form>
+
+		<h:form>
+			<h2>Listagem de Leitores</h2>
+			
+			<h:dataTable value="#{leitorBean.leitores}" var="leitor" styleClass="dados" rowClasses="impar, par">
+				<h:column>
+					<f:facet name="header">Nome do leitor</f:facet>
+					#{leitor.nome}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">E-mail</f:facet>
+					#{leitor.email}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">CPF</f:facet>
+					#{leitor.cpf}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Sexo</f:facet>
+					#{leitor.sexo}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Turma</f:facet>
+					#{leitor.turma}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Matrícula</f:facet>
+					#{leitor.matricula}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Telefones</f:facet>
+					#{leitor.telefones[0].numero}, #{leitor.telefones[1].numero}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Endereço</f:facet>
+					#{leitor.endereco.endereco}, #{leitor.endereco.complemento}, CEP: #{leitor.endereco.cep} 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Bairro</f:facet>
+					#{leitor.endereco.bairro}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Cidade</f:facet>
+					#{leitor.endereco.cidade}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Estado</f:facet>
+					#{leitor.endereco.estado}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Ações</f:facet>
+					<h:commandLink action="#{leitorBean.remover(leitor)}" value="Remover" />
+						
+					&nbsp;
+					
+					<h:commandLink action="#{leitorBean.alterar(leitor)}" value="Alterar" />
+				</h:column>
+			</h:dataTable>
+		</h:form>
+
+	</ui:define>
+	
+</ui:composition>
+</html>

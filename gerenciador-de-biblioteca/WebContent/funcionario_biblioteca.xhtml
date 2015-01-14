@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+<ui:composition template="/WEB-INF/_template.xhtml">
+
+	<ui:define name="corpo">
+	
+		<h:form>
+			<h2>
+				<h:outputText value="Novo Funcionário" rendered="#{empty funcionarioBibliotecaBean.funcionarioBiblioteca.id}" />
+				<h:outputText value="Editar Funcionário" rendered="#{not empty funcionarioBibliotecaBean.funcionarioBiblioteca.id}" />
+			</h2>
+		
+			<fieldset>
+				<legend>Dados do Funcionário</legend>
+				
+				<h:inputHidden value="#{funcionarioBibliotecaBean.funcionarioBiblioteca.id}" />				
+				<h:inputHidden value="#{funcionarioBibliotecaBean.telefoneFixo.id}" />				
+				<h:inputHidden value="#{funcionarioBibliotecaBean.telefoneCelular.id}" />				
+				<h:inputHidden value="#{funcionarioBibliotecaBean.funcionarioBiblioteca.endereco.id}" />
+				<h:inputHidden value="#{funcionarioBibliotecaBean.funcionarioBiblioteca.usuario.id}" />
+			
+				<h:outputLabel value="Nome do Funcionario:" for="nome" />
+				<h:inputText id="nome" value="#{funcionarioBibliotecaBean.funcionarioBiblioteca.nome}" />
+				
+				<h:outputLabel value="E-mail:" for="email" />
+				<h:inputText id="email" value="#{funcionarioBibliotecaBean.funcionarioBiblioteca.email}" />
+				
+				<h:outputLabel value="CPF:" for="cpf" />
+				<h:inputText id="cpf" value="#{funcionarioBibliotecaBean.funcionarioBiblioteca.cpf}" />
+
+				<h:outputLabel value="Sexo:" for="sexo" />
+				<h:selectOneRadio id="sexo" value="#{funcionarioBibliotecaBean.funcionarioBiblioteca.sexo}">
+					<f:selectItem itemValue="M" itemLabel="Masculino" />
+					<f:selectItem itemValue="F" itemLabel="Feminino" />
+				</h:selectOneRadio>
+
+				<h:outputLabel value="Telefone Fixo:" for="telefoneFixo" />
+				<h:inputText id="telefoneFixo" value="#{funcionarioBibliotecaBean.telefoneFixo.numero}" />
+				
+				<h:outputLabel value="Telefone Celular:" for="telefoneCelular" />
+				<h:inputText id="telefoneCelular" value="#{funcionarioBibliotecaBean.telefoneCelular.numero}" />
+				
+				<h:outputLabel value="Endereço:" for="endereco" />
+				<h:inputText id="endereco" value="#{funcionarioBibliotecaBean.funcionarioBiblioteca.endereco.endereco}" />
+				
+				<h:outputLabel value="Complemento:" for="complemento" />
+				<h:inputText id="complemento" value="#{funcionarioBibliotecaBean.funcionarioBiblioteca.endereco.complemento}" />
+				
+				<h:outputLabel value="Cep:" for="cep" />
+				<h:inputText id="cep" value="#{funcionarioBibliotecaBean.funcionarioBiblioteca.endereco.cep}" />
+				
+				<h:outputLabel value="Bairro:" for="bairro" />
+				<h:inputText id="bairro" value="#{funcionarioBibliotecaBean.funcionarioBiblioteca.endereco.bairro}" />
+				
+				<h:outputLabel value="Cidade:" for="cidade" />
+				<h:inputText id="cidade" value="#{funcionarioBibliotecaBean.funcionarioBiblioteca.endereco.cidade}" />
+				
+				<h:outputLabel value="Estado:" for="estado" />
+				<h:inputText id="estado" value="#{funcionarioBibliotecaBean.funcionarioBiblioteca.endereco.estado}" />
+			</fieldset>
+			
+			<fieldset>
+				<legend>Dados de Login</legend>
+				
+				<h:outputLabel value="Usuário:" for="usuario" />
+				<h:inputText id="usuario" value="#{funcionarioBibliotecaBean.funcionarioBiblioteca.usuario.usuario}" />
+				
+				<h:outputLabel value="Senha:" for="senha" />
+				<h:inputSecret id="senha" value="#{funcionarioBibliotecaBean.funcionarioBiblioteca.usuario.senha}" />
+				
+				<h:outputLabel value="O usuário é administrador?" for="admin" />
+				<h:selectOneRadio id="admin" value="#{funcionarioBibliotecaBean.funcionarioBiblioteca.usuario.admin}" 
+									disabled="#{funcionarioBibliotecaBean.campoAdminDesabilitado}">
+					<f:selectItem itemValue="true" itemLabel="Sim" />
+					<f:selectItem itemValue="false" itemLabel="Não" />
+				</h:selectOneRadio>
+				
+				<h:commandButton value="Salvar" action="#{funcionarioBibliotecaBean.salvar}" />
+			</fieldset>
+
+		</h:form>
+
+		<h:form>
+			<h2>Listagem de Funcionários da Biblioteca</h2>
+			
+			<h:dataTable value="#{funcionarioBibliotecaBean.funcionariosBiblioteca}" var="funcionarioBiblioteca" styleClass="dados" rowClasses="impar, par">
+				<h:column>
+					<f:facet name="header">Nome do Funcionario</f:facet>
+					#{funcionarioBiblioteca.nome}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Usuário</f:facet>
+					#{funcionarioBiblioteca.usuario.usuario}, administrador: #{funcionarioBiblioteca.usuario.admin ? "Sim" : "Não"}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">E-mail</f:facet>
+					#{funcionarioBiblioteca.email}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">CPF</f:facet>
+					#{funcionarioBiblioteca.cpf}
+				</h:column>				
+				
+				<h:column>
+					<f:facet name="header">Sexo</f:facet>
+					#{funcionarioBiblioteca.sexo}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Telefones</f:facet>
+					#{funcionarioBiblioteca.telefones[0].numero}, #{funcionarioBiblioteca.telefones[1].numero}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Endereço</f:facet>
+					#{funcionarioBiblioteca.endereco.endereco}, #{funcionarioBiblioteca.endereco.complemento}, CEP: #{funcionarioBiblioteca.endereco.cep} 
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Bairro</f:facet>
+					#{funcionarioBiblioteca.endereco.bairro}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Cidade</f:facet>
+					#{funcionarioBiblioteca.endereco.cidade}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Estado</f:facet>
+					#{funcionarioBiblioteca.endereco.estado}
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Ações</f:facet>
+					<h:commandLink action="#{funcionarioBibliotecaBean.remover(funcionarioBiblioteca)}" value="Remover" />
+						
+					&nbsp;
+					
+					<h:commandLink action="#{funcionarioBibliotecaBean.alterar(funcionarioBiblioteca)}" value="Alterar" />
+				</h:column>
+			</h:dataTable>
+			
+			<f:metadata>
+				<f:event type="preRenderView" listener="#{funcionarioBibliotecaBean.redirecionarParaLogin}" />
+			</f:metadata>
+
+		</h:form>
+
+	</ui:define>
+	
+</ui:composition>
+</html>
