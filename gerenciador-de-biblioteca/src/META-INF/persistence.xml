@@ -8,30 +8,24 @@
 
 		<jta-data-source>java:/bibliotecaDS</jta-data-source>
 		
-		<class>br.com.easyjavamagazine.entidades.Autor</class>
-		<class>br.com.easyjavamagazine.entidades.Categoria</class>
-		<class>br.com.easyjavamagazine.entidades.Editora</class>
-		<class>br.com.easyjavamagazine.entidades.Emprestimo</class>
-		<class>br.com.easyjavamagazine.entidades.Endereco</class>
-		<class>br.com.easyjavamagazine.entidades.FuncionarioBiblioteca</class>
-		<class>br.com.easyjavamagazine.entidades.Leitor</class>
-		<class>br.com.easyjavamagazine.entidades.Livro</class>
-		<class>br.com.easyjavamagazine.entidades.Pessoa</class>
-		<class>br.com.easyjavamagazine.entidades.Telefone</class>
-		<class>br.com.easyjavamagazine.entidades.Usuario</class>
-		<class>br.com.easyjavamagazine.conversores.LocalDateConversor</class>
+		<class>br.com.javamagazine.entidades.Autor</class>
+		<class>br.com.javamagazine.entidades.Categoria</class>
+		<class>br.com.javamagazine.entidades.Editora</class>
+		<class>br.com.javamagazine.entidades.Emprestimo</class>
+		<class>br.com.javamagazine.entidades.Endereco</class>
+		<class>br.com.javamagazine.entidades.FuncionarioBiblioteca</class>
+		<class>br.com.javamagazine.entidades.Leitor</class>
+		<class>br.com.javamagazine.entidades.Livro</class>
+		<class>br.com.javamagazine.entidades.Pessoa</class>
+		<class>br.com.javamagazine.entidades.Telefone</class>
+		<class>br.com.javamagazine.entidades.Usuario</class>
+		<class>br.com.javamagazine.conversores.LocalDateConversor</class>
 
 		<properties>
-			
-			<!--<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/bibliotecaDb" />
-			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="root" />-->
 		
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="false" />
-			<!-- poderia ser: update, create, create-drop, none -->
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			
 		</properties>
