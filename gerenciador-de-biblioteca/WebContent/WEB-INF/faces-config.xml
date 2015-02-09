@@ -7,7 +7,7 @@
     
     <lifecycle>
 	 	<phase-listener>
-	 		br.com.easyjavamagazine.listeners.Autorizador
+	 		br.com.javamagazine.listeners.Autorizador
 	 	</phase-listener>
  	</lifecycle>
 

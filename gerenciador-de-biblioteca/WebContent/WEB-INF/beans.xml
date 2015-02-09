@@ -5,6 +5,6 @@
 	bean-discovery-mode="all">
 	
 	<interceptors>
-		<class>br.com.easyjavamagazine.interceptadores.TransacionalInterceptor</class>
+		<class>br.com.javamagazine.interceptadores.TransacionalInterceptor</class>
 	</interceptors>
 </beans>
