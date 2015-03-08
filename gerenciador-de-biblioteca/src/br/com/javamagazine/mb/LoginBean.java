@@ -41,7 +41,7 @@ public class LoginBean implements Serializable {
 	public String efetuarLogout(){
 		usuarioLogado.deslogar();
 		this.usuario = new Usuario();
-		return "login";
+		return "login?faces-redirect=true";
 	}
 	
 	public boolean isOpcaoCadastroUsuarioHabilitada() {

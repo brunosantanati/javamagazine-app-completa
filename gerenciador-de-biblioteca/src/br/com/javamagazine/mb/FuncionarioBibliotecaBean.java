@@ -86,7 +86,7 @@ public class FuncionarioBibliotecaBean {
 	
 	public void redirecionarParaLogin(){
 		if(redirecionarParaLogin)
-			navegador.forwardTo("login");
+			navegador.redirecionar("login");
 	}
 	
 	@Transacional

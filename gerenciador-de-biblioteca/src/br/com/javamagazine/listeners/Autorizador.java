@@ -29,7 +29,7 @@ public class Autorizador implements PhaseListener {
 			
 			if("/funcionario_biblioteca.xhtml".equals(context.getViewRoot().getViewId()) &&
 					!usuarioLogado.getUsuario().isAdmin()){
-				navegador.forwardTo("menu_principal");
+				navegador.redirecionar("menu_principal");
 			}
 			
 		}else{
@@ -43,7 +43,7 @@ public class Autorizador implements PhaseListener {
 				return;
 			}
 					
-			navegador.forwardTo("login");
+			navegador.redirecionar("login");
 			
 		}
 	}

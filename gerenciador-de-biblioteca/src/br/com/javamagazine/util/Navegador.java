@@ -11,7 +11,7 @@ public class Navegador {
 	@Inject
 	private FacesContext facesContext;
 	
-	public void forwardTo(String url) {
+	public void redirecionar(String url) {
 		navigationHandler.handleNavigation(facesContext, null, url);
 		facesContext.renderResponse();
 	}
