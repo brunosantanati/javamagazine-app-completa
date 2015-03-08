@@ -12,7 +12,7 @@ public class Navegador {
 	private FacesContext facesContext;
 	
 	public void redirecionar(String url) {
-		navigationHandler.handleNavigation(facesContext, null, url);
+		navigationHandler.handleNavigation(facesContext, null, url + "?faces-redirect=true");
 		facesContext.renderResponse();
 	}
 	
