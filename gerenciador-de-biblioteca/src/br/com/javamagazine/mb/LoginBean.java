@@ -30,7 +30,7 @@ public class LoginBean implements Serializable {
 
 		if(usuarioEncontrado != null){
 			usuarioLogado.logar(usuarioEncontrado);
-			return "menu_principal?faces-redirect=true";
+			return "principal?faces-redirect=true";
 		}else{
 			this.usuario = new Usuario();
 			return "login?faces-redirect=true";
